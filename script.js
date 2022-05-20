@@ -19,9 +19,17 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'))
+  .addEventListener('click', chamaFetchItem);
   
   document.querySelector('.items').appendChild(section)
+}
+
+async function chamaFetchItem(event){
+  const id = event.target.parentElement.firstChild.innerText;
+  const cartItem = await fetchItem(id);
+  const {id: sku, title: name, price: salePrice  } = cartItem;
+  createCartItemElement({ sku, name, salePrice })
 }
 
 function getSkuFromProductItem(item) {
@@ -37,7 +45,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
-  return li;
+  return document.querySelector(".cart__items").appendChild(li);
 }
 
 async function chamaFetch(){
@@ -48,5 +56,7 @@ async function chamaFetch(){
   })
 } 
 chamaFetch();
+
+
 
 window.onload = () => { };
