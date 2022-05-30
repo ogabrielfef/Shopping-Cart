@@ -1,3 +1,5 @@
+const getOlItem = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -33,6 +35,7 @@ async function chamaFetchItem(event) {
   const cartItem = await fetchItem(id);
   const { id: sku, title: name, price: salePrice } = cartItem;
   createCartItemElement({ sku, name, salePrice });
+  saveCartItems(getOlItem.innerHTML);
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -44,7 +47,6 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'))
   .addEventListener('click', chamaFetchItem);
-  
   document.querySelector('.items').appendChild(section);
 }
 
@@ -57,4 +59,14 @@ async function chamaFetch() {
 } 
 chamaFetch();
 
-window.onload = () => { };
+document.querySelector('.empty-cart').addEventListener('click', () => {
+  localStorage.clear();
+  getOlItem.innerHTML = '';
+});
+
+window.onload = async () => {
+  getOlItem.innerHTML = getSavedCartItems();
+  const itensDoCarrinho = document.querySelectorAll('.cart__item');
+  Array.from(itensDoCarrinho);
+  itensDoCarrinho.forEach((iten) => iten.addEventListener('click', cartItemClickListener));
+};
