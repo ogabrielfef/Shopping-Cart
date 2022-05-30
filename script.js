@@ -1,4 +1,17 @@
 const getOlItem = document.querySelector('.cart__items');
+const items = document.querySelector('.items');
+
+const adicionaLoading = () => {
+  const loadMessage = document.createElement('p');
+  loadMessage.className = 'loading';
+  loadMessage.innerText = 'Loading...';
+  items.appendChild(loadMessage);
+};
+
+const removeLoading = () => {
+  const loadingMessage = document.querySelector('.loading');
+  loadingMessage.remove();
+};
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -14,7 +27,7 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function cartItemClickListener(event) {
+async function cartItemClickListener(event) {
   event.target.remove();
 }
 
@@ -51,7 +64,9 @@ function createProductItemElement({ sku, name, image }) {
 }
 
 async function chamaFetch() {
+  adicionaLoading();
   const arrayDeElementos = await fetchProducts('computador');
+  removeLoading();
   arrayDeElementos.results.forEach((result) => {
     const { id: sku, title: name, thumbnail: image } = result;
     createProductItemElement({ sku, name, image });
