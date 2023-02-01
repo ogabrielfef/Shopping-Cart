@@ -11,7 +11,7 @@ body {
 
 .header {
   position: relative;
-  background-color: rgb(3, 52, 45);
+  background-color: #3a415a;
   display: flex;
   align-items: center;
   width: 100%;
@@ -32,7 +32,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: rgb(10, 118, 79);
+  background-color: #566981;
   width: 40%;
   height: 100%;
   margin-left: 30px;
@@ -49,7 +49,7 @@ body {
   right: 61.5%;
   width: 39.5%;
   height: 15px;
-  background: rgb(10, 118, 79);
+  background: #34344e;
   transform: skew(-45deg);
   z-index: 0;
 }
@@ -61,7 +61,7 @@ body {
   right: 61.5%;
   width: 39.5%;
   height: 15px;
-  background: rgb(10, 118, 79);
+  background: #34344e;
   transform: skew(45deg);
   z-index: 0;
 }
@@ -88,7 +88,7 @@ body {
   flex-basis: 70%;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 40px 0;
+  padding: 40px 0;
 }
 
 .item {
@@ -97,9 +97,11 @@ body {
   height: auto;
   margin: 5px;
   width: 200px;
-  border: 2px solid rgb(234, 234, 233);
-  border-radius: 5px;
+  border: 3px solid black;
+  border-radius: 15px;
   box-sizing: border-box;
+  background-color: #89a7b1;
+  
 }
 
 .item .item__sku {
@@ -116,22 +118,30 @@ body {
 
 .item .item__image {
   width: 100%;
+  border: 3px solid black;
+  border-radius: 15px;
 }
 
 .item .item__add {
-  background-color: rgb(5, 52, 219);
-  border: 0;
+  background-color: #34344e;
+  border: 1px solid black;
   cursor: pointer;
   margin: 0;
   padding: 10px;
   color: white;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.item .item__price{
+  font-weight: bold;
+  text-align: center;
 }
 
 .cart {
   display: flex;
   flex-basis: 32%;
   flex-flow: column wrap;
-  background-color: rgb(241, 241, 238);
   height: 100vh;
 }
 
@@ -144,6 +154,14 @@ body {
   width: 170px;
   height: 35px;
   margin: 0 auto;
-  border: 2px solid rgb(5, 52, 219);
-  background-color: rgb(249, 249, 246);
+  border: 1px solid black;
+  background-color: #34344e;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.empty-cart:hover {
+  width: 171px;
+  height: 37px;
 }

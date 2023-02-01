@@ -35,9 +35,10 @@ function getSkuFromProductItem(event) {
   return event.target.parentElement.firstChild.innerText;
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ img, sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
+  li.appendChild(createProductImageElement(img));
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
   return document.querySelector('.cart__items').appendChild(li);
@@ -46,18 +47,20 @@ function createCartItemElement({ sku, name, salePrice }) {
 async function chamaFetchItem(event) {
   const id = getSkuFromProductItem(event);
   const cartItem = await fetchItem(id);
-  const { id: sku, title: name, price: salePrice } = cartItem;
-  createCartItemElement({ sku, name, salePrice });
+  const { id: sku, title: name, price: salePrice, thumbnail: img } = cartItem;
+  createCartItemElement({ img, sku, name, salePrice });
   saveCartItems(getOlItem.innerHTML);
+  console.log(cartItem);
 }
 
-function createProductItemElement({ sku, name, image }) {
+function createProductItemElement({ sku, name, image, price }) {
   const section = document.createElement('section');
   section.className = 'item';
 
   section.appendChild(createCustomElement('span', 'item__sku', sku));
-  section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
+  section.appendChild(createCustomElement('span', 'item__title', name));
+  section.appendChild(createCustomElement('span', 'item__price', `R$: ${price}`));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'))
   .addEventListener('click', chamaFetchItem);
   document.querySelector('.items').appendChild(section);
@@ -68,8 +71,9 @@ async function chamaFetch() {
   const arrayDeElementos = await fetchProducts('computador');
   removeLoading();
   arrayDeElementos.results.forEach((result) => {
-    const { id: sku, title: name, thumbnail: image } = result;
-    createProductItemElement({ sku, name, image });
+    const { id: sku, title: name, thumbnail: image, price } = result;
+    createProductItemElement({ sku, name, image, price });
+    // console.log(result);
   });
 } 
 chamaFetch();

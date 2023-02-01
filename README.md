@@ -11,11 +11,11 @@ Carrinho de compras dinâmico utilizando API. <br/>
 
 <br>
 
-⚠️ Projeto passando por algumas alterações de CSS, em breve disponibilizo as mudanças. ⚠️
+<!-- ⚠️ Projeto passando por algumas alterações de CSS, em breve disponibilizo as mudanças. ⚠️ -->
 
-<!-- <p align="center">
-  <img alt="projeto DevLinks" src="./assets/Capa.jpg" width="100%">
-</p> -->
+<p align="center">
+  <img alt="projeto Shoppix" src="./assets/capa-shoppix.jpg">
+</p>
 
 ## 🚀 Tecnologias
 
